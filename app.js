@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // 1.导入mongoose库
 const mongoose = require('mongoose');
 // 2.连接数据库
-const mongoDB = 'mongodb+srv://yufang:yufang93@yf@cluster0-ioygd.mongodb.net/locallibrary?retryWrites=true&w=majority';
+const mongoDB = process.env.MONGODB_URI || 'mongodb+srv://yufang:yufang93@yf@cluster0-ioygd.mongodb.net/locallibrary?retryWrites=true&w=majority';
 mongoose.connect(mongoDB,{ useNewUrlParser: true,useUnifiedTopology: true });
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
