@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  p 欢迎来到 #[em 本地图书馆],一个基于Express框架的项目.
+
+  h1 动态内容
+
+  if error
+    p 获取动态内容失败,错误:!{error}.
+  else
+    p 图书馆有如下记录
+
+    ul
+      li #[strong 书籍:] !{data.book_count}
+      li #[strong 副本:] !{data.book_instance_count}
+      li #[strong 可借副本:] !{data.book_instance_available_count}
+      li #[strong 作者:] !{data.author_count}
+      li #[strong 种类:] !{data.genre_count}

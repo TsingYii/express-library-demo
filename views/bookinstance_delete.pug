@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  h1 #{title}: #{bookinstance.book}
+  p #[strong 出版信息]  #{bookinstance.imprint}
+  p #[strong 还书期限]  #{bookinstance.due_back}
+  p #[strong 借阅状态]  #{bookinstance.status}
+  
+  if bookinstance_books.length
+  
+    p #[strong 删除副本之前请先删除下面的所有书籍]
+  
+    div(style='margin-left:20px;margin-top:20px')
+
+      h4 书籍
+    
+      dl
+      each book in bookinstance_books
+        dt 
+          a(href=book.url) #{book.title}
+        dd #{book.summary}
+
+  else
+    p 你真的想删除这个副本吗?
+    
+    form(method='POST' action='')
+      div.form-group
+        input#bookinstanceid.form-control(type='hidden',name='bookinstanceid', required='true', value=bookinstance._id )
+
+      button.btn.btn-primary(type='submit') 删除

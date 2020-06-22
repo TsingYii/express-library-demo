@@ -1,0 +1,23 @@
+extends layout
+
+block content
+
+    h1 编号: #{bookinstance._id}
+
+    p #[strong 书名:]
+        a(href=bookinstance.book.url) #{bookinstance.book.title}
+    p #[strong 出版商:] #{bookinstance.imprint}
+
+    p #[strong 借阅状态:]
+        if bookinstance.status=='可供借阅'
+            span.text-success #{bookinstance.status}
+        else if bookinstance.status=='馆藏维护'
+            span.text-danger #{bookinstance.status}
+        else
+            span.text-warning #{bookinstance.status}
+
+    if bookinstance.status!='可供借阅'
+        p #[strong 还书期限:] #{bookinstance.due_back_formatted}
+
+    br
+    a(href=bookinstance.url+'/delete') 删除副本

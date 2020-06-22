@@ -1,0 +1,21 @@
+extends layout
+
+block content
+
+    h1 种类: #{genre.name}
+
+    div(style='margin-left:20px;margin-top:20px')
+
+        h4 所有藏书
+
+        dl
+        each book in genre_books
+            dt
+                a(href=book.url) #{book.title}
+            dd #{book.summary}
+
+        else
+            p 该种类没有藏书
+
+    br
+    a(href=genre.url +'/delete') 删除种类

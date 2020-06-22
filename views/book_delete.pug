@@ -1,0 +1,26 @@
+extends layout
+
+block content
+
+    h1 藏书: #{book.title}
+    p  概要: #{book.summary}
+    p isbn: #{book.isbn}
+    if book_bookinstances.length
+        p #[strong 删除藏书之前要删除所有关联的副本]
+        div(style='margin-left:20px;margin-top:20px')
+
+            h4 藏书下的副本
+
+            dl
+                each bookinstance in book_bookinstances
+                    dt
+                        a(href=bookinstance.url) #{bookinstance.imprint}
+                else
+                    p 该藏书没有关联的副本
+    else
+        p 你真的想删除这个藏书吗?
+        form(method='POST' action='')
+            div.form-group
+                input#bookid.form-control(type='hidden',name='bookid', required='true', value=book._id )
+
+            button.btn.btn-primary(type='submit') 删除
